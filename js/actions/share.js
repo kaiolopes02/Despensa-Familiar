@@ -26,9 +26,9 @@ export const ShareActions = {
             const link = `${window.location.origin}${window.location.pathname}?lista=${encoded}`;
 
             const text = 
-                '🛒 *Minha Lista de Despensa*\n\n' +
+                '🛒 *Lista da Despensa*\n\n' +
                 (pending.length 
-                    ? pending.map(i => `• ${i.name} (${i.quantity})`).join('\n')
+                    ? pending.map(i => `• Item: ${i.name} - Qtd: ${i.quantity}`).join('\n')
                     : '_(todos os itens já foram comprados)_') +
                 `\n\n🔗 Acesse e edite: ${link}`;
 
