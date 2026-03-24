@@ -1,8 +1,3 @@
-# 📋 `docs/ARCHITECTURE.md` — Documentação Completa
-
-Como Tech Lead, preparei um documento de arquitetura profissional que sua equipe pode usar como referência:
-
-```markdown
 # 🏗️ Arquitetura — Despensa Familiar
 
 ## 📖 Visão Geral
