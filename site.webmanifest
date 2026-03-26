@@ -2,7 +2,7 @@
   "name": "Despensa Familiar",
   "short_name": "Despensa",
   "description": "Gerencie sua despensa familiar de forma simples e organizada.",
-  "start_url": "/Despensa-Famailiar/",
+  "start_url": "/Despensa-Familiar/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2ecc71",
