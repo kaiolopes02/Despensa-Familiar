@@ -1,0 +1,185 @@
+/* ============================================================
+   RESPONSIVE — Adaptações para diferentes tamanhos de tela
+   ============================================================ */
+
+/* ── Mobile first: ações dos itens sempre visíveis ─────── */
+/* Em touch devices não existe "hover", então mostramos sempre */
+@media (hover: none) {
+  .item-actions {
+    opacity: 1 !important;
+  }
+}
+
+/* Também sempre visível em telas pequenas */
+@media (max-width: 480px) {
+  .item-actions {
+    opacity: 1 !important;
+  }
+
+  /* Cabeçalho mais compacto */
+  .app-header {
+    margin-bottom: 1rem;
+  }
+
+  .brand-text h1 {
+    font-size: var(--text-lg);
+  }
+
+  /* Form mais compacto */
+  .card {
+    padding: 1.125rem;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Stats menores */
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  /* Chips em scroll horizontal */
+  .filter-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 1.25rem;
+    scrollbar-width: none;
+  }
+
+  .filter-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+  }
+
+  /* Item card mais compacto */
+  .item-card {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  /* Botões de ação menores */
+  .btn-action {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  /* Form row empilhado no mobile pequeno */
+  .form-row.split {
+    grid-template-columns: 1fr;
+  }
+
+  /* Lista de ações da lista */
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+
+  .list-actions {
+    width: 100%;
+  }
+
+  .list-actions .btn,
+  #clearBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  #clearBtn {
+    width: 100%;
+  }
+
+  /* Modal cobre mais da tela no mobile */
+  .modal-content {
+    max-height: 92vh;
+  }
+
+  /* Toast mais próximo da borda */
+  .toast-container {
+    bottom: 1rem;
+    width: 95vw;
+  }
+
+  /* Progresso sem label no mobile pequeno */
+  .progress-label {
+    font-size: 0.65rem;
+    min-width: 64px;
+  }
+}
+
+/* ── Tablet / Desktop pequeno ────────────────────────────── */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 1.25rem;
+  }
+
+  .form-row.split {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* ── Desktop ─────────────────────────────────────────────── */
+@media (min-width: 769px) {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  .app-container {
+    padding-bottom: 2rem;
+  }
+
+  .card {
+    padding: 1.75rem;
+  }
+
+  /* Animações mais suaves no desktop (sem motion-reduce) */
+  .item-card {
+    transition: all 0.18s ease;
+  }
+}
+
+/* ── Respeita preferências de animação reduzida ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── PWA / Standalone mode ───────────────────────────────── */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top, 1rem);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+
+  .toast-container {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  }
+}
+
+/* ── Dark mode: sobrescrever cores específicas de categorias ── */
+[data-theme="dark"] .category-badge {
+  filter: brightness(1.15) saturate(0.85);
+}
+
+/* ── High contrast / acessibilidade ─────────────────────── */
+@media (prefers-contrast: high) {
+  .item-card {
+    border-width: 2px;
+  }
+
+  .checkbox {
+    border-width: 3px;
+  }
+
+  .btn-primary {
+    border: 2px solid currentColor;
+  }
+}

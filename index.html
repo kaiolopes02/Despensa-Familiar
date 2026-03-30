@@ -1,199 +1,202 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gerencie sua despensa familiar de forma simples e organizada.">
-    <meta name="theme-color" content="#1a5c3a">
-    <title>Despensa Familiar</title>
-    
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#16a34a">
+  <meta name="description" content="Gerencie a despensa da sua família com facilidade">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Despensa">
+  <title>Despensa Familiar</title>
 
-    <!-- Icons -->
-    <link rel="icon" type="image/png" href="assets/icon-192.png">
-    <link rel="apple-touch-icon" href="assets/icon-192.png">
-    <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#2ecc71">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ✅ CORRIGIDO: caminhos corretos para os arquivos CSS -->
+  <link rel="stylesheet" href="src/styles/variables.css">
+  <link rel="stylesheet" href="src/styles/base.css">
+  <link rel="stylesheet" href="src/styles/components.css">
+  <link rel="stylesheet" href="src/styles/responsive.css">
 </head>
 <body>
-    <main class="app-container" role="main">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-brand">
-                <div class="logo-icon" aria-hidden="true">
-                    <i data-lucide="shopping-basket"></i>
-                </div>
-                <div class="header-title-group">
-                    <h1>Despensa Familiar</h1>
-                    <p class="subtitle">Organização inteligente</p>
-                </div>
-            </div>
-            <div class="header-actions">
-                <button id="shareBtn" class="btn btn-secondary" aria-label="Compartilhar lista">
-                    <i data-lucide="share-2"></i>
-                    <span>Compartilhar</span>
-                </button>
-                <button id="historyBtn" class="btn btn-icon" aria-label="Ver histórico" aria-haspopup="dialog">
-                    <i data-lucide="clock"></i>
-                </button>
-            </div>
-        </header>
+  <div id="app" class="app-container">
 
-        <!-- Form Section -->
-        <section class="card form-section" aria-labelledby="form-title">
-            <h2 id="form-title" class="visually-hidden">Adicionar Item</h2>
-            <input type="hidden" id="editId" value="">
-            
-            <div class="input-group">
-                <label for="itemName">O que está faltando?</label>
-                <div class="input-wrapper">
-                    <input 
-                        type="text" 
-                        id="itemName" 
-                        placeholder=" Ex: Arroz, Leite..." 
-                        autocomplete="off"
-                        aria-required="true"
-                        maxlength="100"
-                    >
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="input-group flex-2">
-                    <label for="itemCategory">Categoria</label>
-                    <div class="select-wrapper">
-                        <select id="itemCategory" aria-label="Selecione a categoria">
-                            <option value="Alimentos">🍎 Alimentos</option>
-                            <option value="Limpeza">🧼 Limpeza</option>
-                            <option value="Higiene">🪥 Higiene</option>
-                            <option value="Outros">📦 Outros</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="select-arrow" aria-hidden="true"></i>
-                    </div>
-                </div>
-                <div class="input-group flex-1">
-                    <label for="itemQuantity">Qtd.</label>
-                    <div class="qty-wrapper">
-                        <button type="button" id="qtyMinus" class="qty-btn" aria-label="Diminuir quantidade">
-                            <i data-lucide="minus"></i>
-                        </button>
-                        <input 
-                            type="number" 
-                            id="itemQuantity" 
-                            value="1" 
-                            min="1" 
-                            max="999"
-                            aria-label="Quantidade"
-                        >
-                        <button type="button" id="qtyPlus" class="qty-btn" aria-label="Aumentar quantidade">
-                            <i data-lucide="plus"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <button id="addBtn" class="btn btn-primary btn-block" type="button">
-                <i data-lucide="plus-circle"></i>
-                <span>Adicionar à Lista</span>
-            </button>
-        </section>
-
-        <!-- List Section -->
-        <section class="list-section" aria-labelledby="list-title">
-            <h2 id="list-title" class="visually-hidden">Lista de Itens</h2>
-            
-            <div id="counter-container" class="stats-card" role="region" aria-label="Estatísticas">
-                <div class="counter-item">
-                    <span id="total-count">0</span>
-                    <label>Pendentes</label>
-                </div>
-                <div class="counter-divider"></div>
-                <div class="counter-item">
-                    <span id="checked-count">0</span>
-                    <label>Comprados</label>
-                </div>
-                <div class="counter-divider"></div>
-                <div class="counter-item">
-                    <span id="total-items">0</span>
-                    <label>Itens</label>
-                </div>
-            </div>
-
-            <div id="filter-bar" role="tablist" aria-label="Filtros de categoria">
-                <button class="filter-btn active" data-filter="todos" role="tab" aria-selected="true">Todos</button>
-                <button class="filter-btn" data-filter="Alimentos" role="tab">🍎 Alimentos</button>
-                <button class="filter-btn" data-filter="Limpeza" role="tab">🧼 Limpeza</button>
-                <button class="filter-btn" data-filter="Higiene" role="tab">🪥 Higiene</button>
-                <button class="filter-btn" data-filter="Outros" role="tab">📦 Outros</button>
-            </div>
-
-            <div id="list-header" class="list-actions hidden">
-                <button id="saveHistoryBtn" class="btn btn-sm btn-outline">
-                    <i data-lucide="save"></i>
-                    <span>Salvar no Histórico</span>
-                </button>
-                <div class="list-header-right">
-                    <button id="clearAllBtn" class="btn btn-sm btn-text-danger">
-                        <i data-lucide="trash-2"></i>
-                        <span>Limpar tudo</span>
-                    </button>
-                </div>
-            </div>
-
-            <ul id="lista" class="item-list" role="list" aria-live="polite" aria-relevant="additions removals"></ul>
-
-            <div id="empty-state" class="empty-state" aria-hidden="true">
-                <div class="empty-icon">
-                    <i data-lucide="clipboard-list"></i>
-                </div>
-                <p>Lista vazia por enquanto!</p>
-                <span>Adicione o primeiro item acima para começar.</span>
-            </div>
-        </section>
-    </main>
-
-    <!-- History Modal -->
-    <div id="history-overlay" class="overlay hidden" aria-hidden="true">
-        <div 
-            id="history-modal" 
-            role="dialog" 
-            aria-modal="true" 
-            aria-labelledby="history-title"
-            aria-describedby="history-desc"
-        >
-            <div class="history-header">
-                <div class="history-title-group">
-                    <i data-lucide="clock" aria-hidden="true"></i>
-                    <h2 id="history-title">Histórico</h2>
-                </div>
-                <button id="closeHistoryBtn" class="btn btn-icon" aria-label="Fechar histórico">
-                    <i data-lucide="x"></i>
-                </button>
-            </div>
-            <p id="history-desc" class="visually-hidden">Lista de compras salvas anteriormente</p>
-            <div id="history-list" class="history-list" role="list"></div>
-            <div id="history-empty" class="empty-state hidden">
-                <i data-lucide="inbox" aria-hidden="true"></i>
-                <p>Nenhuma lista salva ainda.</p>
-                <span>Clique em "Salvar no Histórico" para arquivar.</span>
-            </div>
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🧺</div>
+        <div class="brand-text">
+          <h1>Despensa Familiar</h1>
+          <span class="tagline">Organização inteligente</span>
         </div>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="btn btn-icon" title="Alternar tema" aria-label="Alternar tema claro/escuro">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+        </button>
+        <button id="historyBtn" class="btn btn-icon has-badge" title="Histórico de listas" aria-label="Abrir histórico">
+          <span aria-hidden="true">📚</span>
+          <span class="badge hidden" aria-label="listas salvas">0</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="control-bar">
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Buscar item..."
+          autocomplete="off"
+          aria-label="Buscar item na lista"
+        >
+        <button class="search-clear hidden" id="searchClear" aria-label="Limpar busca">✕</button>
+      </div>
     </div>
 
-    <!-- Toast Container -->
-    <div id="toast-container" aria-live="assertive" aria-atomic="true"></div>
+    <div class="filter-chips" id="filterChips" role="group" aria-label="Filtrar por categoria">
+      <button class="chip active" data-filter="all" aria-pressed="true">Todos</button>
+      <button class="chip" data-filter="Alimentos" aria-pressed="false">🍎 Alimentos</button>
+      <button class="chip" data-filter="Limpeza" aria-pressed="false">🧼 Limpeza</button>
+      <button class="chip" data-filter="Higiene" aria-pressed="false">🪥 Higiene</button>
+      <button class="chip" data-filter="Outros" aria-pressed="false">📦 Outros</button>
+    </div>
 
-    <!-- App Entry Point -->
-    <script type="module" src="js/app.js"></script>
+    <main class="main-content">
+
+      <!-- Formulário de adição/edição -->
+      <section class="card form-section" aria-label="Adicionar item à lista">
+        <input type="hidden" id="editId">
+
+        <div class="form-group">
+          <label for="itemName">O que está faltando?</label>
+          <input
+            type="text"
+            id="itemName"
+            placeholder="Ex: Arroz integral, Detergente..."
+            maxlength="100"
+            autocomplete="off"
+            autocapitalize="words"
+            spellcheck="true"
+          >
+        </div>
+
+        <div class="form-row split">
+          <div class="form-group">
+            <label for="itemCategory">Categoria</label>
+            <select id="itemCategory" aria-label="Selecionar categoria do item">
+              <option value="Alimentos">🍎 Alimentos</option>
+              <option value="Limpeza">🧼 Limpeza</option>
+              <option value="Higiene">🪥 Higiene</option>
+              <option value="Outros">📦 Outros</option>
+            </select>
+          </div>
+
+          <div class="form-group quantity-group">
+            <label for="itemQuantity">Qtd</label>
+            <!-- ✅ CORRIGIDO: data-action adicionado nos botões do stepper -->
+            <div class="quantity-stepper" role="group" aria-label="Selecionar quantidade">
+              <button type="button" class="stepper-btn" data-action="minus" aria-label="Diminuir quantidade">−</button>
+              <input type="number" id="itemQuantity" value="1" min="1" max="999" aria-label="Quantidade">
+              <button type="button" class="stepper-btn" data-action="plus" aria-label="Aumentar quantidade">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button id="addBtn" type="button" class="btn btn-primary btn-block">
+            <span class="btn-emoji" aria-hidden="true">➕</span>
+            <span id="btnText">Adicionar à Lista</span>
+          </button>
+          <button id="cancelEditBtn" type="button" class="btn btn-text hidden">
+            ✕ Cancelar Edição
+          </button>
+        </div>
+      </section>
+
+      <!-- Seção da lista -->
+      <section class="list-section" aria-label="Lista de compras">
+
+        <!-- Stats -->
+        <div class="stats-grid" role="region" aria-label="Resumo da lista">
+          <div class="stat-card">
+            <span class="stat-value" id="statPending">0</span>
+            <span class="stat-label">Pendentes</span>
+          </div>
+          <div class="stat-card accent">
+            <span class="stat-value" id="statCompleted">0</span>
+            <span class="stat-label">Comprados</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">Total</span>
+          </div>
+        </div>
+
+        <!-- Barra de progresso -->
+        <div class="progress-container hidden" id="progressContainer">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+          </div>
+          <span class="progress-label" id="progressLabel">0% concluído</span>
+        </div>
+
+        <!-- Ações da lista -->
+        <div class="list-header hidden" id="listHeader">
+          <div class="list-actions">
+            <button id="shareBtn" type="button" class="btn btn-sm btn-primary" aria-label="Compartilhar lista">
+              <span aria-hidden="true">🔗</span>
+              <span>Compartilhar</span>
+            </button>
+            <button id="saveHistoryBtn" type="button" class="btn btn-sm btn-secondary" aria-label="Salvar lista no histórico">
+              <span aria-hidden="true">💾</span>
+              <span>Salvar</span>
+            </button>
+          </div>
+          <button id="clearBtn" type="button" class="btn btn-sm btn-danger-ghost" aria-label="Limpar toda a lista">
+            <span aria-hidden="true">🗑️</span>
+            <span>Limpar</span>
+          </button>
+        </div>
+
+        <!-- Lista de itens -->
+        <ul id="itemsList" class="items-list" role="list" aria-label="Itens da lista de compras"></ul>
+
+        <!-- Estado vazio -->
+        <div id="emptyState" class="empty-state" role="status" aria-live="polite">
+          <div class="empty-illustration" aria-hidden="true">📝</div>
+          <h3 id="emptyTitle">Lista vazia</h3>
+          <p id="emptySubtitle">Adicione itens acima para começar sua lista de compras</p>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal do Histórico -->
+  <div id="historyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="historyModalTitle">
+          <span aria-hidden="true">📚</span> Histórico de Listas
+        </h2>
+        <button type="button" class="btn btn-icon close-modal" aria-label="Fechar histórico">✕</button>
+      </div>
+      <div class="history-list" id="historyList" role="list"></div>
+      <div class="empty-history hidden" id="emptyHistory" role="status">
+        <div class="empty-illustration" aria-hidden="true">📭</div>
+        <p>Nenhuma lista salva ainda</p>
+        <span class="empty-hint">Use "Salvar" para guardar sua lista atual</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container de toasts -->
+  <div id="toastContainer" class="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ✅ CORRIGIDO: caminho correto para o app.js -->
+  <script type="module" src="src/app.js"></script>
 </body>
 </html>
